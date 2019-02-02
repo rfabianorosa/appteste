@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    image: rfabianorosa/appteste:1.0
+    ports:
+      - "8000:8000"
+    networks:
+      - meuapp
+    depends_on:
+      - redis
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  redis:
+    image: redis:alpine
+    networks:
+      - meuapp
+    deploy:
+      mode: replicated
+      replicas: 2
+
+networks:
+  meuapp:
